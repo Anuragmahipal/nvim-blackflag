@@ -1,0 +1,34 @@
+
+#!/bin/bash
+
+# --- CTF CLI TOOL by Anuragmahipal ---
+
+usage() {
+    echo "Usage: ctfscan <file>"
+    echo "Options:"
+    echo "  -ff     Find FLAG{...} in file"
+    echo "  -d64    Decode base64"
+    echo "  -dhex   Decode hex"
+    echo "  -h      Help"
+    exit 1
+}
+
+if [[ $# -lt 1 ]]; then usage; fi
+
+case "$1" in
+  -ff)
+    grep -aoE 'FLAG\{.*?\}' "$2"
+    ;;
+  -d64)
+    base64 -d "$2"
+    ;;
+  -dhex)
+    xxd -r -p "$2"
+    ;;
+  -h)
+    usage
+    ;;
+  *)
+    grep -aoE 'FLAG\{.*?\}' "$1"
+    ;;
+esac
