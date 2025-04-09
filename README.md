@@ -17,6 +17,25 @@ A custom Neovim config built for CTF warriors, reverse engineers, and cyberpunk 
 - 💻 Minimal UI, terminal-native, CTF-ready
 
 ---
+## 🔥 Neovim CTF Hotkeys
+
+Custom keybindings to help speed up CTF reversing, decoding, and flag hunting directly in Neovim.
+
+| Hotkey        | Action                              | Description                                      |
+|---------------|-------------------------------------|--------------------------------------------------|
+| `<Space>ff`   | Find Flag                           | Jumps to the next `FLAG{}` string in the file   |
+| `<Space>d64`  | Decode Base64                       | Decodes selected base64 string inline            |
+| `<Space>dhex` | Decode Hex                          | Decodes selected hex string to readable text     |
+| `<Space>hex`  | View File as Hex                    | Opens current buffer in hex view (`xxd`)         |
+| `<Space>unhex`| Exit Hex View                       | Converts hex view back to normal text            |
+| `<Space>sv`   | Save & Reload Config                | Writes file and reloads Neovim config (`init.vim`) |
+
+> 🔹 Tip: For decoding, visually select the text first using `v` or `V`, then press the hotkey.
+
+---
+
+These hotkeys are part of [Anuragmahipal](https://github.com/Anuragmahipal)'s custom CTF-ready Neovim setup. Clone, decode, hack! 🚀
+
 
 ## 🚀 Usage
 
