@@ -1,7 +1,7 @@
 
 
 
-# 🛠️ `ctfscan` – Terminal Flag Sniper
+# 🛠️ `ctfscan` –BLACKFLAG
 
 > Instant flag finder & decoder for CTFs.  
 > Built by [@Anuragmahipal](https://github.com/Anuragmahipal)  
