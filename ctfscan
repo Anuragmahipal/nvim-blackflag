@@ -4,31 +4,55 @@
 # --- CTF CLI TOOL by Anuragmahipal ---
 
 usage() {
-    echo "Usage: ctfscan <file>"
+    echo "Usage: ctfscan <option> <file>"
+    echo ""
     echo "Options:"
     echo "  -ff     Find FLAG{...} in file"
     echo "  -d64    Decode base64"
     echo "  -dhex   Decode hex"
+    echo "  -scan   Run exiftool, binwalk, and strings | grep flag"
     echo "  -h      Help"
     exit 1
 }
 
-if [[ $# -lt 1 ]]; then usage; fi
+if [ $# -lt 2 ]; then usage; fi
 
-case "$1" in
+option="$1"
+file="$2"
+
+case "$option" in
   -ff)
-    grep -aoE 'FLAG\{.*?\}' "$2"
+    grep -aE 'flag\{.*?\}|FLAG\{.*?\}|CTF\{.*?\}' "$file"
     ;;
+
   -d64)
-    base64 -d "$2"
+    base64 -d "$file"
     ;;
+
   -dhex)
-    xxd -r -p "$2"
+    xxd -r -p "$file"
     ;;
+
+  -scan)
+    echo "📷 Running exiftool..."
+    exiftool "$file"
+
+    echo -e "\n🧩 Running binwalk..."
+    binwalk "$file"
+
+    echo -e "\n🔎 Running smart flag scan..."
+
+    echo -e "\n🧠 Detecting base64-like, hex, or obfuscated flag strings:\n"
+    strings "$file" | grep -aiE '([A-Za-z0-9+/=]{12,}|flag|f1ag|fl4g|ctf\{)' | grep -vE '^\s*$'
+    ;;
+
   -h)
     usage
     ;;
+
   *)
-    grep -aoE 'FLAG\{.*?\}' "$1"
+    echo "❌ Invalid option!"
+    usage
     ;;
 esac
+
